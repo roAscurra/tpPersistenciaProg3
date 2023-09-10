@@ -51,26 +51,26 @@ public class TpPersistenciaApplication {
 			Producto producto1 = Producto.builder()
 					.tipo(Tipo.INSUMO)
 					.tiempoEstimadoCocina(2)
-					.denominacion("producto 1")
+					.denominacion("Papas fritas")
 					.precioVenta(900.00)
 					.precioCompra(500.00)
 					.stockActual(40)
 					.stockMinimo(10)
-					.unidadMedida("unidad")
-					.foto("foto 1")
+					.unidadMedida("kg")
+					.foto("/img/papasfritas.jpg")
 					.receta("receta 1")
 					.build();
 
 			Producto producto2 = Producto.builder()
 					.tipo(Tipo.MANUFACTURADO)
 					.tiempoEstimadoCocina(4)
-					.denominacion("producto 2")
+					.denominacion("Empanadas")
 					.precioVenta(1000.00)
 					.precioCompra(400.00)
 					.stockActual(60)
 					.stockMinimo(15)
 					.unidadMedida("kg")
-					.foto("foto 2")
+					.foto("/img/empanadas.jpg")
 					.receta("receta 2")
 					.build();
 
@@ -95,9 +95,9 @@ public class TpPersistenciaApplication {
 					.build();
 
 			Pedido pedido1 = Pedido.builder()
-					.fecha("10-09-2023")
+					.fecha("12-09-2023")
 					.estado(Estado.INICIADO)
-					.horaEstimadaEntrega(LocalDateTime.of(2023, 2, 23, 15, 30))
+					.horaEstimadaEntrega(LocalDateTime.of(2023, 9, 12, 15, 30))
 					.tipoEnvio(TipoEnvio.retiro)
 					.total(3400.00)
 					.build();
@@ -113,14 +113,14 @@ public class TpPersistenciaApplication {
 			pedido2.agregarDetallePedido(detallePedido2);
 
 			Factura factura1 = Factura.builder()
-					.fecha(formato.parse("09-07-2023"))
+					.fecha(formato.parse("12-09-2023"))
 					.numero(2)
 					.descuento(400.00)
 					.formaPago(FormaPago.TRANSFERENCIA)
 					.total(2900)
 					.build();
 			Factura factura2 = Factura.builder()
-					.fecha(formato.parse("10-07-2023"))
+					.fecha(formato.parse("12-09-2023"))
 					.numero(3)
 					.descuento(800.00)
 					.formaPago(FormaPago.MERCADOPAGO)
@@ -132,7 +132,7 @@ public class TpPersistenciaApplication {
 
 			Usuario usuario1 = Usuario.builder()
 					.nombre("Juan")
-					.password("qwert")
+					.password("qwerty123")
 					.rol("cocinero")
 					.build();
 					usuario1.agregarPedidosUsuario(pedido1);
@@ -142,22 +142,21 @@ public class TpPersistenciaApplication {
 					.nombre("Juan")
 					.apellido("Pérez")
 					.telefono("261004589")
-					.email("email@gmail.com")
+					.email("juanperez@gmail.com")
 					.build();
-
-			cliente1.agregarPedidosCliente(pedido1);
 
 			Cliente cliente2 = Cliente.builder()
 					.nombre("Luis")
 					.apellido("Prado")
 					.telefono("261025549")
-					.email("email2@gmail.com")
+					.email("luisprado2@gmail.com")
 					.build();
 
 			cliente2.agregarPedidosCliente(pedido2);
+			cliente2.agregarPedidosCliente(pedido1);
 
 			Domicilio domicilio1 = Domicilio.builder()
-					.calle("calle x")
+					.calle("calle Salta")
 					.numero("424")
 					.localidad("San Martin")
 					.cliente(cliente1)
@@ -170,6 +169,7 @@ public class TpPersistenciaApplication {
 
 			usuarioRepository.save(usuario1);
 			pedidoRepository.save(pedido1);
+			pedidoRepository.save(pedido2);
 			clienteRepository.save(cliente1);
 			clienteRepository.save(cliente2);
 			facturaRepository.save(factura1);
